@@ -63,6 +63,9 @@ class ConsoleInterface:
 
     def search_book(self):
         print("Поиск книги")
+        author = input("Введите автора: ")
+        title = input("Введите название: ")
+
         self.footer_menu()
 
     def delete_book(self):
