@@ -13,11 +13,14 @@ class Book:
         :param genre:  Жанр книги (по умолчанию None)
         :param isbn:  Идентификационный номер книги (по умолчанию None)
         """
-        self.title = title
+
+        self.id = None
         self.author = author
-        self.genre = genre
+        self.title = title
         self.year = year
+        self.genre = genre
         self.__isbn = uuid.uuid4().hex[:9]
+
 
 
     def get_info(self):
@@ -80,13 +83,27 @@ class Book:
         return current_year - self._year
 
     def to_dict(self):
-        data = {"author": self.author,
+        data = {"id": self.id,
+                "author": self.author,
                 "title": self.title,
                 "year": self.year,
                 "genre": self.genre,
                 "ISBN": self.__isbn
                 }
         return data
+    @classmethod
+    def from_dict(cls, book_data):
+        book = Book(
+            author=book_data["author"],
+            title = book_data["title"],
+            year = book_data["year"],
+            genre = book_data["genre"]
+
+        )
+        book.isbn = book_data["ISBN"]
+        book.id = book_data["id"]
+        return book
+
 
     @property
     def genre(self):
@@ -100,12 +117,21 @@ class Book:
         else:
             raise ValueError("Неизвестный жанр")
 
+    @property
+    def isbn(self):
+        return self.__isbn
 
-book = Book(title="Капитанская дочка", author="Пушкин", year=1836, genre="роман")
+    @isbn.setter
+    def isbn(self, isbn):
+        self.__isbn = isbn
 
-print(book.get_info)
-book.year = 1837
-print(book.year)
-print(book.get_book_age())
-print(book.is_order_than(year=1700))
+
+
+# book = Book(title="Капитанская дочка", author="Пушкин", year=1836, genre="роман")
+#
+# print(book.get_info)
+# book.year = 1837
+# print(book.year)
+# print(book.get_book_age())
+# print(book.is_order_than(year=1700))
 
