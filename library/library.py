@@ -21,13 +21,13 @@ class Library:
         if isinstance(book, Book):
             self.increment_book_id()
             book.id = str(self.last_id)
-
             self.storage.write_data(book.to_dict())
             return book
         raise ValueError("Неверный формат книги!")
 
     # def get_book_info(self, book_id):
     #     return self.books.get(book_id)
+
     def get_book_by_id(self, book_id):
         book = self.books.get(book_id)
         if book:
@@ -38,7 +38,7 @@ class Library:
         for id_, book in self.books.items():
             if isbn == book.get("isbn"):
                 return id_, book
-        raise ValueError("Такой книги нет")
+            raise ValueError("Такой книги нет")
 
     def get_books_by_author(self, author):
         books = {}
