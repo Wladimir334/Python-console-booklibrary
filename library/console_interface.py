@@ -12,6 +12,8 @@ class ConsoleInterface:
         print("2. Показать книгу")
         print("3. Поиск книг")
         print("4. Удалить книгу")
+        print("5. Сохранить книги")
+        print("6. Показать количество книг")
         print("0. Выход")
 
         self.process_main_menu()
@@ -20,13 +22,17 @@ class ConsoleInterface:
         action = input(">>> ")
         match action:
             case "1":
-                self.show_book()
+                self.show_books()
             case "2":
                 self.add_book()
             case "3":
                 self.search_book()
             case "4":
                 self.delete_book()
+            case "5":
+                self.save_books()
+            case "6":
+                self.show_quantity_books()
             case "0":
                 sys.exit()
             case _:
@@ -116,6 +122,21 @@ class ConsoleInterface:
         if self.library.check_book(isbn):
             self.library.book_delete(isbn)
         self.footer_menu()
+
+    def save_books(self):
+        filename = input("Введите имя файла: ")
+        try:
+            self.library.dump_books_data(filename)
+            print(f'Данные книг успешно сохнанены в файл {filename}.json')
+        except Exception as e:
+            print('Операция завершена не удачно')
+            print(e)
+        finally:
+            self.footer_menu()
+
+    def show_quantity_books(self):
+        pass
+
 
     def footer_menu(self):
         print("Введите 1 для выхода в главное меню")

@@ -76,7 +76,7 @@ class Library:
         books = self.storage.read_data()
         # проходимсся по списку словарей и
         for i, book in enumerate(books):
-            # удаляем словарь с нужным isbn
+            # удаляем словарь с нужным isbngit
             if book['ISBN'].lower() == isbn.lower():
                 books.pop(i)
         # очищаем файл (начиная с конца хедера (33))
@@ -88,7 +88,6 @@ class Library:
             self.add_book(Book.from_dict(book))
 
 
-
     def get_book_count(self):
         pass
 
@@ -98,3 +97,6 @@ class Library:
             if item['ISBN'].lower() == isbn.lower():
                 return item['ISBN']
         return None
+
+    def dump_books_data(self, filename):
+        self.storage.dump_books_to_json(filename)
