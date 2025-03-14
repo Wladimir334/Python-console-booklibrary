@@ -9,11 +9,11 @@ class ConsoleInterface:
         print("Добро пожаловать в ИС 'Электронная библиотека'")
         print("Выберите нужное действие:")
         print("1. Показать все книги")
-        print("2. Показать книгу")
+        print("2. Добавить книгу")
         print("3. Поиск книг")
         print("4. Удалить книгу")
         print("5. Сохранить книги")
-        print("6. Показать количество книг")
+        print("6. Показать книгу по годам")
         print("0. Выход")
 
         self.process_main_menu()
@@ -32,7 +32,7 @@ class ConsoleInterface:
             case "5":
                 self.save_books()
             case "6":
-                self.show_quantity_books()
+                self.show_years_books()
             case "0":
                 sys.exit()
             case _:
@@ -134,8 +134,9 @@ class ConsoleInterface:
         finally:
             self.footer_menu()
 
-    def show_quantity_books(self):
-        pass
+    def show_years_books(self, year):
+        year = input("Введите год издания книги: ")
+
 
 
     def footer_menu(self):

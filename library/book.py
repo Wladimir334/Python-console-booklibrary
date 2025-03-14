@@ -91,6 +91,7 @@ class Book:
                 "ISBN": self.__isbn
                 }
         return data
+
     @classmethod
     def from_dict(cls, book_data):
         book = Book(

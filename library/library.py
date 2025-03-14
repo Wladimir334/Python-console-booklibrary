@@ -50,6 +50,11 @@ class Library:
                     results.append(Book.from_dict(item))
         return results
 
+    def get_books_by_year(self, year):
+        books = self.storage.read_data()
+        for item in books:
+
+
     def get_books_by_title(self, title):
         books = {}
         for id_, book in self.books.items():
