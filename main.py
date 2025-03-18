@@ -5,7 +5,7 @@ from db import CSVStorage
 def main():
     csv_storage = CSVStorage("books.csv")
     library = Library(storage=csv_storage)
-    console = ConsoleInterface(source=library)
+    console = ConsoleInterface(source=library, csv=csv_storage)
 
     while True:
         console.main_menu()

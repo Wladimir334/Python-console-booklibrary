@@ -1,8 +1,10 @@
 import sys
 from . import Book
+from db import CSVStorage
 
 class ConsoleInterface:
-    def __init__(self, source):
+    def __init__(self, source, csv):
+        self.csv = csv
         self.library = source
 
     def main_menu(self):
@@ -134,8 +136,15 @@ class ConsoleInterface:
         finally:
             self.footer_menu()
 
-    def show_years_books(self, year):
-        year = input("Введите год издания книги: ")
+    def show_years_books(self):
+        books = self.csv.read_data()
+        year_start = int(input("Введите начальный год издания книги: "))
+        year_end = int(input("Введите конечный год издания книги: "))
+        for book in books:
+            if year_start <= int(book["year"]) and int(book["year"]) <= year_end:
+               print(book)
+            else:
+                print("Нет книги с таким годом")
 
 
 
