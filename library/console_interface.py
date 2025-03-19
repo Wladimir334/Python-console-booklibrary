@@ -80,7 +80,8 @@ class ConsoleInterface:
 
 
     def process_search_book(self):
-        text = ("31. Поиск по автору\n"
+        text = ("30. Поиск по автору и названию\n"
+                "31. Поиск по автору\n"
                 "32. Поиск по названию\n"
                 "33. Поиск по ISBN")
         print(text)
@@ -89,6 +90,16 @@ class ConsoleInterface:
 
         new_action = input(">>> ")
         match new_action:
+            case "30":
+                author = input("Введите автора: ")
+                title = input("Введите название: ")
+                books = self.library.get_books_by_author(author)
+                books_2 = self.library.get_books_by_title(title)
+                name_and_title = books + books_2
+                if name_and_title:
+                    self.show_books_info(books)
+                else:
+                    print("По вашему запросу книг не найдено")
             case "31":
                 author = input("Введите автора: ")
                 books = self.library.get_books_by_author(author)
