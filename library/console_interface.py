@@ -93,13 +93,15 @@ class ConsoleInterface:
             case "30":
                 author = input("Введите автора: ")
                 title = input("Введите название: ")
-                books = self.library.get_books_by_author(author)
-                books_2 = self.library.get_books_by_title(title)
-                name_and_title = books + books_2
-                if name_and_title:
-                    self.show_books_info(books)
-                else:
+                books = self.csv.read_data()
+                found = False
+                for book in books:
+                    if author == book['author'] and title == book['title']:
+                        print(book)
+                        found = True
+                if not found:
                     print("По вашему запросу книг не найдено")
+
             case "31":
                 author = input("Введите автора: ")
                 books = self.library.get_books_by_author(author)
